@@ -3,8 +3,11 @@ import express from 'express';
 import cors from 'cors'
 import dotenv from 'dotenv';
 import connectDB from './config/db.js';
+import productRoutes from './routes/productRoutes.js';
+import {notFound, errorHandler} from '../backend/middleware/errorMiddleware.js';
+
 dotenv.config();
-import products from './data/products.js';
+
 
 connectDB();
 const port = process.env.PORT || 5000;
@@ -24,15 +27,9 @@ app.get('/', (req, res)=>{
    console.log('API is running....');
 })
 
-app.get('/api/products', (req, res) =>{
-    res.json(products);
-})
-
-app.get('/api/products/:id', (req, res) =>{
-
-    const product = products.find((p)=> p._id === req.params.id)
-    res.json(product);
-})
+app.use('/api/products', productRoutes);
+app.use(notFound);
+app.use(errorHandler);
 
 
 app.listen(port, ()=>{
