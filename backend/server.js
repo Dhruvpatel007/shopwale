@@ -3,7 +3,9 @@ import express from 'express';
 import cors from 'cors'
 import dotenv from 'dotenv';
 import connectDB from './config/db.js';
+import cookieParser from 'cookie-parser';
 import productRoutes from './routes/productRoutes.js';
+import userRoutes from '../backend/routes/userRoutes.js'
 import {notFound, errorHandler} from '../backend/middleware/errorMiddleware.js';
 
 dotenv.config();
@@ -13,8 +15,12 @@ connectDB();
 const port = process.env.PORT || 5000;
  
 const app=express();
-// const cors = require('cors');
+app.use(express.json())
+app.use(express.urlencoded({extended: true}))
 app.use(cors());
+
+// cookie parser middleware
+app.use(cookieParser())
 
 app.use(function(req, res, next) {
     res.header("Access-Control-Allow-Origin", "*");
@@ -28,6 +34,7 @@ app.get('/', (req, res)=>{
 })
 
 app.use('/api/products', productRoutes);
+app.use('/api/users', userRoutes);
 app.use(notFound);
 app.use(errorHandler);
 

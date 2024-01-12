@@ -13,7 +13,6 @@ import {
 import Rating from "../Components/Rating";
 import { useGetProductDetailsQuery } from "../slices/productApiSlice";
 import Loader from "../Components/Loader"
-// import Message from '../Components/Message'
 import Message from "../Components/Message";
 import React, { useState } from 'react'
 import { useDispatch } from "react-redux";
