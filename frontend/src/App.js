@@ -1,6 +1,7 @@
 import React from 'react'
 import { Container } from 'react-bootstrap'
-
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import Header from './Components/Header'
 import Footer from './Components/Footer'
 // import HomeScreen from './screens/HomeScreen'
@@ -16,6 +17,7 @@ const App = () => {
       </Container>
     </main>
     <Footer />
+    <ToastContainer />
     </>
   )
 }
