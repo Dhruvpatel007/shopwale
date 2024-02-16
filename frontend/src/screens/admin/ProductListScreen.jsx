@@ -13,10 +13,8 @@ import { toast } from 'react-toastify';
 const ProductListScreen = () => {
   const { pageNumber } = useParams();
 
-  const { data:product, isLoading, error, refetch } = useGetProductsQuery({
-    pageNumber,
-  });
-  console.log(product);
+  const { data:product, isLoading, error, refetch } = useGetProductsQuery();
+  
 
   const [deleteProduct, { isLoading: loadingDelete }] =
     useDeleteProductMutation();
@@ -59,8 +57,8 @@ const ProductListScreen = () => {
         </Col>
       </Row>
 
-      {/* {loadingCreate && <Loader />}
-      {loadingDelete && <Loader />} */}
+      {loadingCreate && <Loader />}
+      {loadingDelete && <Loader />}
       {isLoading ? (
         <Loader />
       ) : error ? (

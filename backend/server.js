@@ -1,12 +1,14 @@
 // const express = require(express);
 import express from 'express';
 // import cors from 'cors'
+import path from 'path';
 import dotenv from 'dotenv';
 import connectDB from './config/db.js';
 import cookieParser from 'cookie-parser';
 import productRoutes from './routes/productRoutes.js';
 import userRoutes from '../backend/routes/userRoutes.js'
 import orderRoutes from '../backend/routes/orderRoutes.js'
+import uploadRoutes from '../backend/routes/uploadRoutes.js'
 import {notFound, errorHandler} from '../backend/middleware/errorMiddleware.js';
 
 dotenv.config();
@@ -34,9 +36,13 @@ app.get('/', (req, res)=>{
    console.log('API is running....');
 })
 
+const __dirname = path.resolve();
+app.use('/uploads',express.static(path.join(__dirname, '/uploads')));
+
 app.use('/api/products', productRoutes);
 app.use('/api/users', userRoutes);
 app.use('/api/orders', orderRoutes);
+app.use('/api/upload',uploadRoutes);
 app.use(notFound);
 app.use(errorHandler);
 
