@@ -63,7 +63,7 @@ const UserListScreen = () => {
                 <td>
                 <LinkContainer
                         to={`/admin/user/${user._id}/edit`}
-                        style={{ marginRight: '10px' }}
+                        style={{ marginRight: '10px', alignItems: 'left' }}
                       >
                         <Button variant='light' className='btn-sm'>
                           <FaEdit />
@@ -76,7 +76,7 @@ const UserListScreen = () => {
                         className='btn-sm'
                         onClick={() => deleteHandler(user._id)}
                       >
-                        <FaTrash style={{ color: 'white', }} />
+                        <FaTrash style={{ color: 'white',  }} />
                       </Button>
                     </>
                   )}

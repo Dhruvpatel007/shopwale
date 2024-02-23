@@ -6,10 +6,12 @@ import Product from '../Components/Product'
 import Loader from '../Components/Loader'
 import Message from '../Components/Message'
 import { useGetProductsQuery } from '../slices/productApiSlice'
+import { useParams } from 'react-router-dom'
+import ProductCarousel from '../Components/ProductCarousel'
 
 
 const HomeScreen = () => {
-
+  const {pageNumber, keyword} = useParams();
   // const [products, setProducts] = useState([]);
 
   // useEffect(()=>{
@@ -21,13 +23,16 @@ const HomeScreen = () => {
   //   }
   //   fetchProduct();
   // }, []);
-  const {data: products, isLoading, error} = useGetProductsQuery();
+  const {data: products, isLoading, error} = useGetProductsQuery({keyword, pageNumber  });
+  console.log(products);
+ 
   // if (isLoading) return <h1>Loading...</h1>
   // console.log(products);
 
   return (
     <>
     {isLoading ? (<Loader />): error? (<Message verient='danger'>{error?.data?.message || error.error}</Message>) : (<>
+    <ProductCarousel />
     <h1>Latest Product</h1>
     <Row>
       {products.map((product)=>{
