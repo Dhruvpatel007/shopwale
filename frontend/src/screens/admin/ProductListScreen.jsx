@@ -11,9 +11,9 @@ import {useGetProductsQuery,
 import { toast } from 'react-toastify';
 
 const ProductListScreen = () => {
-  const { pageNumber } = useParams();
+  const {pageNumber, keyword} = useParams();
 
-  const { data:product, isLoading, error, refetch } = useGetProductsQuery();
+  const { data:product, isLoading, error, refetch } = useGetProductsQuery({keyword});
   
 
   const [deleteProduct, { isLoading: loadingDelete }] =

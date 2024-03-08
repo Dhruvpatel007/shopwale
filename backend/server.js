@@ -25,6 +25,10 @@ app.use(express.urlencoded({extended: true}))
 // cookie parser middleware
 app.use(cookieParser())
 
+app.get('/', (req, res)=>{
+  console.log('API is running....'); 
+})
+
 app.use(function(req, res, next) {
     res.header("Access-Control-Allow-Origin", "*");
     res.header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
@@ -38,19 +42,7 @@ const __dirname = path.resolve();
 app.use('/uploads',express.static(path.join(__dirname, '/uploads')));
 
 
-// last added part
-if(process.env.NODE_ENV === 'production') {
-  // set static folder
-  app.use(express.static(path.join(__dirname, '/frontend/build')));
 
-  // any route that is not api will be redirected to index.html
-  app.get('*', (req, res) =>
-  res.sendFile(path.resolve(__dirname, 'frontend', 'build', 'index.html')) )
-}else{
-  app.get('/', (req, res)=>{
-    console.log('API is running....'); 
- })
-}
 
 app.use('/api/products', productRoutes);
 app.use('/api/users', userRoutes);

@@ -68,7 +68,7 @@ const ProductScreen = () => {
       refetch();
       toast.success('Review created successfully');
     } catch (err) {
-      toast.error(err?.data?.message || err.error);
+      // toast.error(err?.data?.message || err.error);
     }
   };
 
